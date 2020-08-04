@@ -1,5 +1,7 @@
 package com.api.memory.webservices.user;
 
+import com.api.memory.webservices.music.Music;
+
 import javax.persistence.*;
 import java.util.List;
 
