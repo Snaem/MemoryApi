@@ -12,7 +12,8 @@ public class Music {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
+
     private String youtubeVideoId;
     private String thumbnails;
     private String title;
