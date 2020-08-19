@@ -18,6 +18,14 @@ public class Music {
     public Music() {
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getYoutubeVideoId() {
         return youtubeVideoId;
     }
