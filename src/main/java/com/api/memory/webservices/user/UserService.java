@@ -44,4 +44,5 @@ public class UserService {
         ApplicationUser userToReturn = new ApplicationUser(currentUser.getId(), currentUser.getUsername(), currentUser.getMusics());
         return userToReturn;
     }
+
 }

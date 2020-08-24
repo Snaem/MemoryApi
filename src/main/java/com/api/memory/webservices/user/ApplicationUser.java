@@ -1,14 +1,12 @@
 package com.api.memory.webservices.user;
 
 import com.api.memory.webservices.music.Music;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
-import java.util.Collection;
-import java.util.HashSet;
+
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 public class ApplicationUser {
@@ -23,8 +21,9 @@ public class ApplicationUser {
     private String username;
     private String password;
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "users")
-    public List<Music> musics;
+    public List<Music> musics = new ArrayList<>();
 
     public ApplicationUser() {
     }

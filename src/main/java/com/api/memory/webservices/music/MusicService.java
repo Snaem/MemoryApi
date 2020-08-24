@@ -8,6 +8,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -21,13 +22,21 @@ public class MusicService {
 
     public List<Music> getAllMusic() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String userName = authentication.getName();
-        ApplicationUser currentUser = userRepository.findByUsername(userName);
+        String userMail = authentication.getName();
+        ApplicationUser currentUser = userRepository.findByEmail(userMail);
 
         return currentUser.getMusics();
     }
 
     public Music saveMusic(Music music) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String userMail = authentication.getName();
+        ApplicationUser currentUser = userRepository.findByEmail(userMail);
+
+        List<ApplicationUser> userToAdd = new ArrayList<>();
+        userToAdd.add(currentUser);
+
+        music.setUsers(userToAdd);
         return repository.save(music);
     }
 

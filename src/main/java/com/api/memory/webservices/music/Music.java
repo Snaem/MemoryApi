@@ -1,7 +1,11 @@
 package com.api.memory.webservices.music;
 import com.api.memory.webservices.user.ApplicationUser;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -17,16 +21,16 @@ public class Music {
     private String title;
     private Date addedAt;
 
-    @ManyToMany(fetch= FetchType.EAGER)
+
+    @ManyToMany
     @JoinTable(name ="user_music",
             joinColumns = @JoinColumn(name="music_id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id")
-    )
-    private List<ApplicationUser> users;
-
+            inverseJoinColumns = @JoinColumn(name = "application_user_id"))
+    private List<ApplicationUser> users = new ArrayList<>();
 
     public Music() {
     }
+
 
     public Long getId() {
         return id;
