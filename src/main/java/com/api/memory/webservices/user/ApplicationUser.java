@@ -1,8 +1,11 @@
 package com.api.memory.webservices.user;
 
 import com.api.memory.webservices.music.Music;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -10,25 +13,32 @@ public class ApplicationUser {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
+
     private String firstname;
     private String lastname;
     private String email;
     private String username;
     private String password;
 
-    @OneToMany
-    @JoinColumn(name="user_id")
-    private List<Music> musics;
+    @JsonIgnore
+    @ManyToMany(mappedBy = "users")
+    public List<Music> musics = new ArrayList<>();
 
     public ApplicationUser() {
     }
 
-    public long getId() {
+    public ApplicationUser(Long id, String username, List<Music> musics) {
+        this.id = id;
+        this.username = username;
+        this.musics = musics;
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -79,4 +89,5 @@ public class ApplicationUser {
     public void setMusics(List<Music> musics) {
         this.musics = musics;
     }
+
 }
