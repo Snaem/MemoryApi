@@ -1,7 +1,12 @@
 package com.api.memory.webservices.music;
 
+import com.api.memory.webservices.user.ApplicationUser;
+import com.api.memory.webservices.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+
 
 import java.util.List;
 
@@ -11,8 +16,16 @@ public class MusicService {
     @Autowired
     MusicRepository repository;
 
-    public List<Music> getAllMusic() {return repository.findAll();}
+    @Autowired
+    UserRepository userRepository;
 
+    public List<Music> getAllMusic() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String userName = authentication.getName();
+        ApplicationUser currentUser = userRepository.findByUsername(userName);
+
+        return currentUser.getMusics();
+    }
 
     public Music saveMusic(Music music) {
         return repository.save(music);
