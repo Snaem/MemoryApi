@@ -36,8 +36,15 @@ public class MusicService {
         List<ApplicationUser> userToAdd = new ArrayList<>();
         userToAdd.add(currentUser);
 
-        music.setUsers(userToAdd);
-        return repository.save(music);
+        Music duplicateMusic = repository.findByYoutubeVideoId(music.getYoutubeVideoId());
+
+        if ( duplicateMusic != null ) {
+            duplicateMusic.getUsers().add(currentUser);
+            return repository.save(duplicateMusic);
+        } else {
+            music.setUsers(userToAdd);
+            return repository.save(music);
+        }
     }
 
     public void deleteMusic(Long id) {
