@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 @Service
@@ -36,11 +37,33 @@ public class MusicService {
         List<ApplicationUser> userToAdd = new ArrayList<>();
         userToAdd.add(currentUser);
 
-        music.setUsers(userToAdd);
-        return repository.save(music);
+        Music duplicateMusic = repository.findByYoutubeVideoId(music.getYoutubeVideoId());
+
+        if ( duplicateMusic != null ) {
+            duplicateMusic.getUsers().add(currentUser);
+            return repository.save(duplicateMusic);
+        } else {
+            music.setUsers(userToAdd);
+            return repository.save(music);
+        }
     }
 
-    public void deleteMusic(Long id) {
-        repository.deleteById(id);
+    public void deleteMusic(String youtubeVideoId) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String userMail = authentication.getName();
+        ApplicationUser currentUser = userRepository.findByEmail(userMail);
+
+        Music musicToDelete = repository.findByYoutubeVideoId(youtubeVideoId);
+
+        List<ApplicationUser> users = musicToDelete.getUsers();
+
+        users.removeIf(user -> user.getId().equals(currentUser.getId()));
+        musicToDelete.setUsers(users);
+
+        if (musicToDelete.getUsers().size() == 0) {
+            repository.delete(musicToDelete);
+        } else {
+            repository.save(musicToDelete);
+        }
     }
 }

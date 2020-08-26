@@ -24,7 +24,7 @@ public class MusicController {
     }
 
     @DeleteMapping
-    public void deleteMusic(@RequestParam Long id) {
-        service.deleteMusic(id);
+    public void deleteMusic(@RequestParam String youtubeVideoId) {
+        service.deleteMusic(youtubeVideoId);
     }
 }
