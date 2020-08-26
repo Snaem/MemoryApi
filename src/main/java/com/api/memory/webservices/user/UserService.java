@@ -27,7 +27,7 @@ public class UserService {
         msg.setTo(user.getEmail());
 
         msg.setSubject("Bienvenue sur Memory " + user.getUsername() + " !");
-        msg.setText("Salut à toi " + user.getUsername() +" !" +"\n" + "\n" + "Bienvenue sur Memory, le site qui te permettra de ne plus jamais perdre une petite pétite sur Youtube ! "
+        msg.setText("Salut à toi " + user.getUsername() +" !" +"\n" + "\n" + "Bienvenue sur Memory Musics, le site qui te permettra de ne plus jamais perdre une petite pétite sur Youtube ! "
                 + "\n" + "\n" +
                 "Merci à toi de nous avoir rejoint ! Commence tout de suite ta collection de musique sur https://memory-musics.clementcheradame.fr/ " + "\n" + "\n" +
                 "À bientôt !");
