@@ -47,13 +47,14 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder);
     }
 
-    /* @Bean
+    @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("https://memory-musics.clementcheradame.fr"));
-        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "DELETE"));
-        configuration.setAllowedHeaders(Arrays.asList("Authorization", "Cache-Control", "Content-Type"));
+        configuration.setAllowedOrigins(Arrays.asList(CorsConfiguration.ALL));
+        configuration.setAllowedMethods(Arrays.asList(CorsConfiguration.ALL));
+        configuration.setAllowedHeaders(Arrays.asList(CorsConfiguration.ALL));
         List<String> headerExposed = new ArrayList<>();
+        headerExposed.add("Access-Control-Allow-Origin: *");
         headerExposed.add("Authorization");
         headerExposed.add("authorization");
         configuration.setExposedHeaders(headerExposed);
@@ -62,5 +63,4 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         source.registerCorsConfiguration("/**", configuration);
         return source;
     }
-   */
 }
