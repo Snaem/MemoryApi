@@ -50,11 +50,12 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList(CorsConfiguration.ALL));
+        List<String> allowedOrigins = new ArrayList<>();
+        allowedOrigins.add("https://memory-musics.clementcheradame.fr/");
+        configuration.setAllowedOrigins(allowedOrigins);
         configuration.setAllowedMethods(Arrays.asList(CorsConfiguration.ALL));
         configuration.setAllowedHeaders(Arrays.asList(CorsConfiguration.ALL));
         List<String> headerExposed = new ArrayList<>();
-        headerExposed.add("Access-Control-Allow-Origin: *");
         headerExposed.add("Authorization");
         headerExposed.add("authorization");
         configuration.setExposedHeaders(headerExposed);
