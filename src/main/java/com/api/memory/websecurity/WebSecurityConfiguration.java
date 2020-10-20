@@ -52,7 +52,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(Arrays.asList("https://memory-musics.clementcheradame.fr"));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "DELETE"));
-        configuration.setAllowedHeaders(Arrays.asList(CorsConfiguration.ALL));
+        configuration.setAllowedHeaders(Arrays.asList("Authorization", "Cache-Control", "Content-Type"));
         List<String> headerExposed = new ArrayList<>();
         headerExposed.add("Authorization");
         headerExposed.add("authorization");
